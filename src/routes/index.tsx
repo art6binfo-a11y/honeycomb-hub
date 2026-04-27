@@ -4,6 +4,7 @@ import { Hero } from "@/components/home/Hero";
 import { NewsTicker } from "@/components/home/NewsTicker";
 import { FeaturedTutorials } from "@/components/home/FeaturedTutorials";
 import { CategoryTiles } from "@/components/home/CategoryTiles";
+import { FlightPaths } from "@/components/home/FlightPaths";
 import { LatestReviews } from "@/components/home/LatestReviews";
 import { PromptDiary } from "@/components/home/PromptDiary";
 import { CommunityQA } from "@/components/home/CommunityQA";
@@ -36,6 +37,7 @@ function Index() {
       <Hero />
       <NewsTicker />
       <FeaturedTutorials />
+      <FlightPaths />
       <CategoryTiles />
       <Pollinator />
       <LatestReviews />
