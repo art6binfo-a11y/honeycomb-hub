@@ -8,6 +8,7 @@ import { LatestReviews } from "@/components/home/LatestReviews";
 import { PromptDiary } from "@/components/home/PromptDiary";
 import { CommunityQA } from "@/components/home/CommunityQA";
 import { NewsletterCTA } from "@/components/home/NewsletterCTA";
+import { Pollinator } from "@/components/home/Pollinator";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,6 +37,7 @@ function Index() {
       <NewsTicker />
       <FeaturedTutorials />
       <CategoryTiles />
+      <Pollinator />
       <LatestReviews />
       <PromptDiary />
       <CommunityQA />
