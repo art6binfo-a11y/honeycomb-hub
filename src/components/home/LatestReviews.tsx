@@ -1,4 +1,4 @@
-import { ArrowUpRight, Info, Star } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, Check, Info, Star, X } from "lucide-react";
 import { Section } from "./FeaturedTutorials";
 import {
   Tooltip,
@@ -18,6 +18,17 @@ type Review = {
   bestFor: string;
   visitUrl: string;
   reviewUrl: string;
+  pros: string[];
+  cons: string[];
+  /** Tailwind classes applied to the Pros/Cons block to evoke the tool's brand */
+  brandTint: string;
+  brandAccent: string;
+  editor: {
+    name: string;
+    initials: string;
+    avatarTint: string;
+    hours: string;
+  };
 };
 
 const reviews: Review[] = [
@@ -32,6 +43,16 @@ const reviews: Review[] = [
     bestFor: "Best for Everyday Use",
     visitUrl: "https://chat.openai.com",
     reviewUrl: "/reviews",
+    pros: ["Best ecosystem & plugins", "Excellent voice mode"],
+    cons: ["Slower on peak hours", "Caps on GPT-4o usage"],
+    brandTint: "bg-emerald-50 border-emerald-200",
+    brandAccent: "text-emerald-700",
+    editor: {
+      name: "Rahul S.",
+      initials: "RS",
+      avatarTint: "bg-emerald-500",
+      hours: "20+ hours",
+    },
   },
   {
     name: "Claude 3.5 Sonnet",
@@ -44,6 +65,16 @@ const reviews: Review[] = [
     bestFor: "Best for Solo-founders",
     visitUrl: "https://claude.ai",
     reviewUrl: "/reviews",
+    pros: ["Most natural prose", "200K context window"],
+    cons: ["No image generation", "Stricter content rules"],
+    brandTint: "bg-purple-50 border-purple-200",
+    brandAccent: "text-purple-700",
+    editor: {
+      name: "Ayesha R.",
+      initials: "AR",
+      avatarTint: "bg-purple-500",
+      hours: "25+ hours",
+    },
   },
   {
     name: "Midjourney v6",
@@ -56,6 +87,16 @@ const reviews: Review[] = [
     bestFor: "Best for Designers",
     visitUrl: "https://midjourney.com",
     reviewUrl: "/reviews",
+    pros: ["Unmatched artistic style", "Fast, consistent results"],
+    cons: ["Discord-first workflow", "Tricky text rendering"],
+    brandTint: "bg-fuchsia-50 border-fuchsia-200",
+    brandAccent: "text-fuchsia-700",
+    editor: {
+      name: "Priya M.",
+      initials: "PM",
+      avatarTint: "bg-fuchsia-500",
+      hours: "30+ hours",
+    },
   },
   {
     name: "Perplexity Pro",
@@ -68,6 +109,16 @@ const reviews: Review[] = [
     bestFor: "Best for Researchers",
     visitUrl: "https://perplexity.ai",
     reviewUrl: "/reviews",
+    pros: ["Citations on every answer", "Live web access"],
+    cons: ["Shallower on niche topics", "Limited image gen"],
+    brandTint: "bg-sky-50 border-sky-200",
+    brandAccent: "text-sky-700",
+    editor: {
+      name: "Faisal M.",
+      initials: "FM",
+      avatarTint: "bg-sky-500",
+      hours: "18+ hours",
+    },
   },
   {
     name: "Notion AI",
@@ -80,6 +131,16 @@ const reviews: Review[] = [
     bestFor: "Best for Teams",
     visitUrl: "https://notion.so/product/ai",
     reviewUrl: "/reviews",
+    pros: ["Lives inside your docs", "Great Q&A on workspace"],
+    cons: ["Weaker than dedicated LLMs", "Per-seat pricing adds up"],
+    brandTint: "bg-stone-100 border-stone-300",
+    brandAccent: "text-stone-700",
+    editor: {
+      name: "Nadia K.",
+      initials: "NK",
+      avatarTint: "bg-stone-700",
+      hours: "22+ hours",
+    },
   },
 ];
 
@@ -92,7 +153,7 @@ export function LatestReviews() {
             {reviews.map((r) => (
               <div
                 key={r.name}
-                className="relative flex w-72 lg:w-auto flex-col bg-card rounded-2xl border border-border p-5 hover:border-bee-gold hover:shadow-card-hover transition-all hover:-translate-y-1"
+                className="relative flex w-80 lg:w-auto flex-col bg-card rounded-2xl border border-border p-5 hover:border-bee-gold hover:shadow-card-hover transition-all hover:-translate-y-1"
               >
                 {/* Pricing badge */}
                 <div className="absolute -top-2.5 right-4 inline-flex items-center gap-1 rounded-full bg-deep-night px-2.5 py-1 text-[10px] font-700 uppercase tracking-wider text-bee-gold border border-bee-gold/40 shadow-sm">
@@ -142,6 +203,72 @@ export function LatestReviews() {
                   >
                     {r.verdict}
                   </span>
+                </div>
+
+                {/* Pros & Cons — brand-tinted */}
+                <div className={`mt-4 rounded-xl border ${r.brandTint} p-3`}>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <div
+                        className={`mb-1.5 text-[10px] font-700 uppercase tracking-wider ${r.brandAccent}`}
+                      >
+                        Pros
+                      </div>
+                      <ul className="space-y-1">
+                        {r.pros.map((p) => (
+                          <li
+                            key={p}
+                            className="flex items-start gap-1.5 text-[11.5px] leading-snug text-foreground/80"
+                          >
+                            <Check
+                              className="mt-[2px] h-3 w-3 shrink-0 text-emerald-600"
+                              strokeWidth={3}
+                            />
+                            <span>{p}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="mb-1.5 text-[10px] font-700 uppercase tracking-wider text-rose-700/80">
+                        Cons
+                      </div>
+                      <ul className="space-y-1">
+                        {r.cons.map((c) => (
+                          <li
+                            key={c}
+                            className="flex items-start gap-1.5 text-[11.5px] leading-snug text-foreground/80"
+                          >
+                            <X
+                              className="mt-[2px] h-3 w-3 shrink-0 text-rose-500"
+                              strokeWidth={3}
+                            />
+                            <span>{c}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Human Verified */}
+                <div className="mt-3 flex items-center gap-2.5 rounded-lg bg-pollen/50 border border-bee-gold/20 px-2.5 py-2">
+                  <div
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[10px] font-700 text-white ${r.editor.avatarTint}`}
+                    aria-hidden
+                  >
+                    {r.editor.initials}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-1 text-[10px] font-700 uppercase tracking-wider text-emerald-700">
+                      <BadgeCheck className="h-3 w-3" />
+                      Human Verified
+                    </div>
+                    <div className="text-[11.5px] text-foreground/80 leading-tight truncate">
+                      Tested for {r.editor.hours} by{" "}
+                      <span className="font-600 text-foreground">{r.editor.name}</span>
+                    </div>
+                  </div>
                 </div>
 
                 {/* CTAs */}
