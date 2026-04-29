@@ -242,7 +242,7 @@ export function Pollinator() {
                       type="button"
                       onClick={() => handleSelect(current.key, opt)}
                       className={cn(
-                        "group flex flex-col items-center justify-center gap-2 rounded-2xl border-2 px-4 py-5 text-center transition-all hover:-translate-y-0.5",
+                        "group flex flex-col items-center justify-center gap-2 rounded-2xl border-2 px-5 py-7 text-center transition-all hover:-translate-y-0.5",
                         selected
                           ? "border-bee-gold bg-bee-gold/10 shadow-card-hover"
                           : "border-border bg-background hover:border-bee-gold/60 hover:bg-pollen/40",
@@ -327,17 +327,17 @@ export function Pollinator() {
                 <p className="mt-4 text-[14px] leading-relaxed text-foreground/80">
                   {recommendation.reason}
                 </p>
-                <div className="mt-5 flex flex-wrap items-center gap-3">
+                <div className="mt-8 flex flex-wrap items-center gap-5">
                   <a
                     href={recommendation.href}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-deep-night px-4 py-2 text-[13px] font-700 text-bee-gold hover:bg-hive-light transition-colors"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-deep-night px-6 py-3 text-[13px] font-700 text-bee-gold hover:bg-hive-light transition-colors"
                   >
                     Read full review <ArrowRight className="h-3.5 w-3.5" />
                   </a>
                   <button
                     type="button"
                     onClick={reset}
-                    className="inline-flex items-center gap-1.5 text-[13px] font-600 text-muted-foreground hover:text-foreground transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 text-[13px] font-600 text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <RotateCcw className="h-3.5 w-3.5" /> Start over
                   </button>
