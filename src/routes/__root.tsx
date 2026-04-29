@@ -39,6 +39,13 @@ export const Route = createRootRoute({
       { name: "theme-color", content: "#1a1200" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "askyourbee — Your AI Learning Hub for Beginners" },
+      { name: "twitter:title", content: "askyourbee — Your AI Learning Hub for Beginners" },
+      { name: "description", content: "A modern AI learning hub website for beginners, featuring a warm, honeycomb-inspired design." },
+      { property: "og:description", content: "A modern AI learning hub website for beginners, featuring a warm, honeycomb-inspired design." },
+      { name: "twitter:description", content: "A modern AI learning hub website for beginners, featuring a warm, honeycomb-inspired design." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/2e9fa9d3-9405-4eb7-ba9b-8f4b5f55e5a0/id-preview-e66c1133--c017ab1a-cad5-44fa-8ef2-502adaf653e8.lovable.app-1777468398822.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/2e9fa9d3-9405-4eb7-ba9b-8f4b5f55e5a0/id-preview-e66c1133--c017ab1a-cad5-44fa-8ef2-502adaf653e8.lovable.app-1777468398822.png" },
     ],
     links: [
       {
