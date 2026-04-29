@@ -73,6 +73,7 @@ export function SiteFooter() {
           <div className="flex gap-5">
             <a href="#" className="hover:text-bee-gold">Privacy</a>
             <a href="#" className="hover:text-bee-gold">Terms</a>
+            <a href="#" className="hover:text-bee-gold">Disclaimer &amp; Disclosures</a>
             <a href="#" className="hover:text-bee-gold">Cookies</a>
           </div>
         </div>

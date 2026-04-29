@@ -23,6 +23,9 @@ export function Hero() {
             Step-by-step tutorials, honest reviews, and a community of AI learners
             — built for beginners who want to keep up with the future.
           </p>
+          <p className="mt-4 max-w-xl text-[14px] sm:text-[15px] leading-relaxed text-honey-lite/60">
+            Discover the best AI tools for beginners with our step-by-step tutorials, honest software reviews, and prompt templates. Whether you want to boost your daily productivity, write better content, or generate AI art, our community is here to help you learn.
+          </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <button className="group inline-flex items-center gap-2 rounded-lg bg-bee-gold px-6 py-3 text-[14px] font-600 text-deep-night shadow-bee hover:brightness-105 active:translate-y-px transition">
               Explore AI Guides

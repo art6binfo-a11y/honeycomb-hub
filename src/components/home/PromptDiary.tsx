@@ -126,10 +126,10 @@ function PromptCard({ prompt }: { prompt: (typeof prompts)[number] }) {
       )}
 
       <div className="mt-auto pt-5">
-        <div className="pt-4 border-t border-hive-light/40 flex items-center justify-between">
+        <div className="pt-5 mt-2 border-t border-hive-light/40 flex items-center justify-between gap-4">
           <button
             onClick={handleCopy}
-            className="inline-flex items-center gap-1.5 text-[12px] font-600 text-bee-gold hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-md px-3 py-2 text-[12px] font-600 text-bee-gold hover:text-white hover:bg-bee-gold/10 transition-colors"
           >
             {copied ? (
               <>
@@ -141,7 +141,7 @@ function PromptCard({ prompt }: { prompt: (typeof prompts)[number] }) {
               </>
             )}
           </button>
-          <button className="text-[12px] text-dark-amber hover:text-bee-gold">Save</button>
+          <button className="rounded-md px-3 py-2 text-[12px] text-dark-amber hover:text-bee-gold hover:bg-bee-gold/5 transition-colors">Save</button>
         </div>
       </div>
     </article>
