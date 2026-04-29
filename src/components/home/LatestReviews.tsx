@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { ArrowUpRight, BadgeCheck, Check, Info, Star, X } from "lucide-react";
 import { Section } from "./FeaturedTutorials";
 import {
@@ -151,10 +152,9 @@ export function LatestReviews() {
         <div className="-mx-6 px-6 overflow-x-auto pb-2">
           <div className="flex gap-5 min-w-max lg:min-w-0 lg:grid lg:grid-cols-5">
             {reviews.map((r, idx) => (
-              <>
+              <Fragment key={r.name}>
               {idx === 2 && (
                 <div
-                  key="in-feed-ad"
                   role="complementary"
                   aria-label="Advertisement"
                   className="relative flex w-80 lg:w-auto flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-muted/30 p-5 min-h-[420px]"
@@ -168,7 +168,6 @@ export function LatestReviews() {
                 </div>
               )}
               <div
-                key={r.name}
                 className="relative flex w-80 lg:w-auto flex-col bg-card rounded-2xl border border-border p-5 hover:border-bee-gold hover:shadow-card-hover transition-all hover:-translate-y-1"
               >
                 {/* Pricing badge */}
@@ -328,7 +327,7 @@ export function LatestReviews() {
                   </a>
                 </div>
               </div>
-              </>
+              </Fragment>
             ))}
           </div>
         </div>
