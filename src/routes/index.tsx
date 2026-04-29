@@ -9,6 +9,9 @@ import { PromptDiary } from "@/components/home/PromptDiary";
 import { CommunityQA } from "@/components/home/CommunityQA";
 import { NewsletterCTA } from "@/components/home/NewsletterCTA";
 import { Pollinator } from "@/components/home/Pollinator";
+import { TrendingSearches } from "@/components/home/TrendingSearches";
+import { AdSpacer } from "@/components/home/AdSpacer";
+import { EditorialPromise } from "@/components/home/EditorialPromise";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -35,12 +38,15 @@ function Index() {
     <SiteLayout>
       <Hero />
       <NewsTicker />
-      <FeaturedTutorials />
       <CategoryTiles />
+      <TrendingSearches />
+      <FeaturedTutorials />
+      <AdSpacer />
       <Pollinator />
       <LatestReviews />
       <PromptDiary />
       <CommunityQA />
+      <EditorialPromise />
       <NewsletterCTA />
     </SiteLayout>
   );
