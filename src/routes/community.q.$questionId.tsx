@@ -45,8 +45,6 @@ function QuestionDetail() {
       setAVotes(av);
     }
     setLoading(false);
-    // increment view count (fire-and-forget; ignored if RLS blocks)
-    if (qd) supabase.rpc("noop").then(() => {}).catch(() => {});
   };
 
   useEffect(() => { load(); }, [questionId, user?.id]);
