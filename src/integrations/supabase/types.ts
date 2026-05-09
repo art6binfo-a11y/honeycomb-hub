@@ -14,16 +14,441 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      answers: {
+        Row: {
+          author_id: string
+          body: string
+          comments_count: number
+          created_at: string
+          edited_at: string | null
+          id: string
+          is_anonymous: boolean
+          question_id: string
+          score: number
+          status: Database["public"]["Enums"]["content_status"]
+          updated_at: string
+        }
+        Insert: {
+          author_id: string
+          body: string
+          comments_count?: number
+          created_at?: string
+          edited_at?: string | null
+          id?: string
+          is_anonymous?: boolean
+          question_id: string
+          score?: number
+          status?: Database["public"]["Enums"]["content_status"]
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string
+          body?: string
+          comments_count?: number
+          created_at?: string
+          edited_at?: string | null
+          id?: string
+          is_anonymous?: boolean
+          question_id?: string
+          score?: number
+          status?: Database["public"]["Enums"]["content_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "answers_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      blocked_words: {
+        Row: {
+          created_at: string
+          id: string
+          word: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          word: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          word?: string
+        }
+        Relationships: []
+      }
+      comments: {
+        Row: {
+          author_id: string
+          body: string
+          created_at: string
+          id: string
+          is_anonymous: boolean
+          parent_id: string
+          parent_type: Database["public"]["Enums"]["target_type"]
+          reply_to_comment_id: string | null
+          score: number
+          status: Database["public"]["Enums"]["content_status"]
+        }
+        Insert: {
+          author_id: string
+          body: string
+          created_at?: string
+          id?: string
+          is_anonymous?: boolean
+          parent_id: string
+          parent_type: Database["public"]["Enums"]["target_type"]
+          reply_to_comment_id?: string | null
+          score?: number
+          status?: Database["public"]["Enums"]["content_status"]
+        }
+        Update: {
+          author_id?: string
+          body?: string
+          created_at?: string
+          id?: string
+          is_anonymous?: boolean
+          parent_id?: string
+          parent_type?: Database["public"]["Enums"]["target_type"]
+          reply_to_comment_id?: string | null
+          score?: number
+          status?: Database["public"]["Enums"]["content_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comments_reply_to_comment_id_fkey"
+            columns: ["reply_to_comment_id"]
+            isOneToOne: false
+            referencedRelation: "comments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      follows_topic: {
+        Row: {
+          created_at: string
+          topic_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          topic_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          topic_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "follows_topic_topic_id_fkey"
+            columns: ["topic_id"]
+            isOneToOne: false
+            referencedRelation: "topics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      follows_user: {
+        Row: {
+          created_at: string
+          followed_id: string
+          follower_id: string
+        }
+        Insert: {
+          created_at?: string
+          followed_id: string
+          follower_id: string
+        }
+        Update: {
+          created_at?: string
+          followed_id?: string
+          follower_id?: string
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          created_at: string
+          id: string
+          payload: Json
+          read_at: string | null
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          payload?: Json
+          read_at?: string | null
+          type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          payload?: Json
+          read_at?: string | null
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          username: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          display_name?: string | null
+          id: string
+          username: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          username?: string
+        }
+        Relationships: []
+      }
+      question_topics: {
+        Row: {
+          question_id: string
+          topic_id: string
+        }
+        Insert: {
+          question_id: string
+          topic_id: string
+        }
+        Update: {
+          question_id?: string
+          topic_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "question_topics_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "question_topics_topic_id_fkey"
+            columns: ["topic_id"]
+            isOneToOne: false
+            referencedRelation: "topics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      questions: {
+        Row: {
+          answers_count: number
+          author_id: string
+          body: string
+          comments_count: number
+          created_at: string
+          id: string
+          is_anonymous: boolean
+          score: number
+          status: Database["public"]["Enums"]["content_status"]
+          title: string
+          updated_at: string
+          views_count: number
+        }
+        Insert: {
+          answers_count?: number
+          author_id: string
+          body?: string
+          comments_count?: number
+          created_at?: string
+          id?: string
+          is_anonymous?: boolean
+          score?: number
+          status?: Database["public"]["Enums"]["content_status"]
+          title: string
+          updated_at?: string
+          views_count?: number
+        }
+        Update: {
+          answers_count?: number
+          author_id?: string
+          body?: string
+          comments_count?: number
+          created_at?: string
+          id?: string
+          is_anonymous?: boolean
+          score?: number
+          status?: Database["public"]["Enums"]["content_status"]
+          title?: string
+          updated_at?: string
+          views_count?: number
+        }
+        Relationships: []
+      }
+      reports: {
+        Row: {
+          created_at: string
+          id: string
+          note: string | null
+          reason: string
+          reporter_id: string
+          resolved_at: string | null
+          resolved_by: string | null
+          status: Database["public"]["Enums"]["report_status"]
+          target_id: string
+          target_type: Database["public"]["Enums"]["target_type"]
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          note?: string | null
+          reason: string
+          reporter_id: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: Database["public"]["Enums"]["report_status"]
+          target_id: string
+          target_type: Database["public"]["Enums"]["target_type"]
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          note?: string | null
+          reason?: string
+          reporter_id?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: Database["public"]["Enums"]["report_status"]
+          target_id?: string
+          target_type?: Database["public"]["Enums"]["target_type"]
+        }
+        Relationships: []
+      }
+      topics: {
+        Row: {
+          created_at: string
+          description: string | null
+          followers_count: number
+          icon: string | null
+          id: string
+          name: string
+          questions_count: number
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          followers_count?: number
+          icon?: string | null
+          id?: string
+          name: string
+          questions_count?: number
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          followers_count?: number
+          icon?: string | null
+          id?: string
+          name?: string
+          questions_count?: number
+          slug?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      votes: {
+        Row: {
+          created_at: string
+          id: string
+          target_id: string
+          target_type: Database["public"]["Enums"]["target_type"]
+          user_id: string
+          value: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          target_id: string
+          target_type: Database["public"]["Enums"]["target_type"]
+          user_id: string
+          value: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          target_id?: string
+          target_type?: Database["public"]["Enums"]["target_type"]
+          user_id?: string
+          value?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      apply_vote_delta: {
+        Args: {
+          _delta: number
+          _target_id: string
+          _target_type: Database["public"]["Enums"]["target_type"]
+        }
+        Returns: undefined
+      }
+      contains_blocked_word: { Args: { _text: string }; Returns: boolean }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
+      content_status: "open" | "closed" | "removed"
+      report_status: "pending" | "resolved" | "dismissed"
+      target_type: "question" | "answer" | "comment"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +575,11 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+      content_status: ["open", "closed", "removed"],
+      report_status: ["pending", "resolved", "dismissed"],
+      target_type: ["question", "answer", "comment"],
+    },
   },
 } as const
