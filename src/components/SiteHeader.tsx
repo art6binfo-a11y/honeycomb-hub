@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "@tanstack/react-router";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { Search, Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/use-auth";
 
 const guidesGroups = [
   {
@@ -85,6 +86,7 @@ const dailyLifeGroups = [
 
 const navItems = [
   { label: "Home", to: "/" as const },
+  { label: "Community", to: "/community" as const },
   { label: "AI Tools & Guides", to: "/guides" as const, dropdown: "guides" as const },
   { label: "AI For Daily Life", to: "/daily-life" as const, dropdown: "daily" as const },
   { label: "AI Tools Review", to: "/reviews" as const },
@@ -98,6 +100,8 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileGroup, setMobileGroup] = useState<string | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, profile, signOut } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -174,10 +178,37 @@ export function SiteHeader() {
           >
             <Search className="h-3.5 w-3.5" /> Search
           </button>
-          <button className="hidden sm:inline-flex rounded-md border border-bee-gold/40 px-3 py-1.5 text-[12px] text-bee-gold hover:bg-bee-gold/10 transition-colors">
-            Login
-          </button>
-          <button className="rounded-md bg-bee-gold px-3.5 py-1.5 text-[12px] font-600 text-deep-night shadow-bee hover:brightness-105 active:translate-y-px transition">
+          {user ? (
+            <>
+              <Link
+                to="/community/u/$username"
+                params={{ username: profile?.username ?? "" }}
+                className="hidden sm:inline-flex items-center gap-2 rounded-md border border-bee-gold/40 px-2.5 py-1.5 text-[12px] text-bee-gold hover:bg-bee-gold/10 transition-colors"
+              >
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-bee-gold text-[10px] font-700 text-deep-night">
+                  {(profile?.display_name || profile?.username || "U").slice(0, 1).toUpperCase()}
+                </span>
+                {profile?.display_name || profile?.username || "Profile"}
+              </Link>
+              <button
+                onClick={() => signOut()}
+                className="hidden sm:inline-flex rounded-md border border-bee-gold/40 px-3 py-1.5 text-[12px] text-bee-gold hover:bg-bee-gold/10 transition-colors"
+              >
+                Sign out
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/login"
+              className="hidden sm:inline-flex rounded-md border border-bee-gold/40 px-3 py-1.5 text-[12px] text-bee-gold hover:bg-bee-gold/10 transition-colors"
+            >
+              Login
+            </Link>
+          )}
+          <button
+            onClick={() => navigate({ to: user ? "/community/ask" : "/login", search: user ? undefined : { redirect: "/community/ask" } } as any)}
+            className="rounded-md bg-bee-gold px-3.5 py-1.5 text-[12px] font-600 text-deep-night shadow-bee hover:brightness-105 active:translate-y-px transition"
+          >
             Ask a Question
           </button>
           <button

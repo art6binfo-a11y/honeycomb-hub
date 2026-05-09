@@ -9,16 +9,35 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ReviewsRouteImport } from './routes/reviews'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as GuidesRouteImport } from './routes/guides'
 import { Route as DailyLifeRouteImport } from './routes/daily-life'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CommunityRouteImport } from './routes/community'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CommunityIndexRouteImport } from './routes/community.index'
+import { Route as CommunityTopicsRouteImport } from './routes/community.topics'
+import { Route as CommunityAskRouteImport } from './routes/community.ask'
+import { Route as CommunityUUsernameRouteImport } from './routes/community.u.$username'
+import { Route as CommunityTopicsSlugRouteImport } from './routes/community.topics.$slug'
+import { Route as CommunityQQuestionIdRouteImport } from './routes/community.q.$questionId'
 
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReviewsRoute = ReviewsRouteImport.update({
   id: '/reviews',
   path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuidesRoute = GuidesRouteImport.update({
@@ -36,6 +55,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -46,14 +70,53 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CommunityIndexRoute = CommunityIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CommunityRoute,
+} as any)
+const CommunityTopicsRoute = CommunityTopicsRouteImport.update({
+  id: '/topics',
+  path: '/topics',
+  getParentRoute: () => CommunityRoute,
+} as any)
+const CommunityAskRoute = CommunityAskRouteImport.update({
+  id: '/ask',
+  path: '/ask',
+  getParentRoute: () => CommunityRoute,
+} as any)
+const CommunityUUsernameRoute = CommunityUUsernameRouteImport.update({
+  id: '/u/$username',
+  path: '/u/$username',
+  getParentRoute: () => CommunityRoute,
+} as any)
+const CommunityTopicsSlugRoute = CommunityTopicsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CommunityTopicsRoute,
+} as any)
+const CommunityQQuestionIdRoute = CommunityQQuestionIdRouteImport.update({
+  id: '/q/$questionId',
+  path: '/q/$questionId',
+  getParentRoute: () => CommunityRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/community': typeof CommunityRouteWithChildren
   '/contact': typeof ContactRoute
   '/daily-life': typeof DailyLifeRoute
   '/guides': typeof GuidesRoute
+  '/login': typeof LoginRoute
   '/reviews': typeof ReviewsRoute
+  '/signup': typeof SignupRoute
+  '/community/ask': typeof CommunityAskRoute
+  '/community/topics': typeof CommunityTopicsRouteWithChildren
+  '/community/': typeof CommunityIndexRoute
+  '/community/q/$questionId': typeof CommunityQQuestionIdRoute
+  '/community/topics/$slug': typeof CommunityTopicsSlugRoute
+  '/community/u/$username': typeof CommunityUUsernameRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -61,54 +124,120 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/daily-life': typeof DailyLifeRoute
   '/guides': typeof GuidesRoute
+  '/login': typeof LoginRoute
   '/reviews': typeof ReviewsRoute
+  '/signup': typeof SignupRoute
+  '/community/ask': typeof CommunityAskRoute
+  '/community/topics': typeof CommunityTopicsRouteWithChildren
+  '/community': typeof CommunityIndexRoute
+  '/community/q/$questionId': typeof CommunityQQuestionIdRoute
+  '/community/topics/$slug': typeof CommunityTopicsSlugRoute
+  '/community/u/$username': typeof CommunityUUsernameRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/community': typeof CommunityRouteWithChildren
   '/contact': typeof ContactRoute
   '/daily-life': typeof DailyLifeRoute
   '/guides': typeof GuidesRoute
+  '/login': typeof LoginRoute
   '/reviews': typeof ReviewsRoute
+  '/signup': typeof SignupRoute
+  '/community/ask': typeof CommunityAskRoute
+  '/community/topics': typeof CommunityTopicsRouteWithChildren
+  '/community/': typeof CommunityIndexRoute
+  '/community/q/$questionId': typeof CommunityQQuestionIdRoute
+  '/community/topics/$slug': typeof CommunityTopicsSlugRoute
+  '/community/u/$username': typeof CommunityUUsernameRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/community'
     | '/contact'
     | '/daily-life'
     | '/guides'
+    | '/login'
     | '/reviews'
+    | '/signup'
+    | '/community/ask'
+    | '/community/topics'
+    | '/community/'
+    | '/community/q/$questionId'
+    | '/community/topics/$slug'
+    | '/community/u/$username'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/daily-life' | '/guides' | '/reviews'
-  id:
-    | '__root__'
+  to:
     | '/'
     | '/about'
     | '/contact'
     | '/daily-life'
     | '/guides'
+    | '/login'
     | '/reviews'
+    | '/signup'
+    | '/community/ask'
+    | '/community/topics'
+    | '/community'
+    | '/community/q/$questionId'
+    | '/community/topics/$slug'
+    | '/community/u/$username'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/community'
+    | '/contact'
+    | '/daily-life'
+    | '/guides'
+    | '/login'
+    | '/reviews'
+    | '/signup'
+    | '/community/ask'
+    | '/community/topics'
+    | '/community/'
+    | '/community/q/$questionId'
+    | '/community/topics/$slug'
+    | '/community/u/$username'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  CommunityRoute: typeof CommunityRouteWithChildren
   ContactRoute: typeof ContactRoute
   DailyLifeRoute: typeof DailyLifeRoute
   GuidesRoute: typeof GuidesRoute
+  LoginRoute: typeof LoginRoute
   ReviewsRoute: typeof ReviewsRoute
+  SignupRoute: typeof SignupRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reviews': {
       id: '/reviews'
       path: '/reviews'
       fullPath: '/reviews'
       preLoaderRoute: typeof ReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides': {
@@ -132,6 +261,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -146,26 +282,94 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/community/': {
+      id: '/community/'
+      path: '/'
+      fullPath: '/community/'
+      preLoaderRoute: typeof CommunityIndexRouteImport
+      parentRoute: typeof CommunityRoute
+    }
+    '/community/topics': {
+      id: '/community/topics'
+      path: '/topics'
+      fullPath: '/community/topics'
+      preLoaderRoute: typeof CommunityTopicsRouteImport
+      parentRoute: typeof CommunityRoute
+    }
+    '/community/ask': {
+      id: '/community/ask'
+      path: '/ask'
+      fullPath: '/community/ask'
+      preLoaderRoute: typeof CommunityAskRouteImport
+      parentRoute: typeof CommunityRoute
+    }
+    '/community/u/$username': {
+      id: '/community/u/$username'
+      path: '/u/$username'
+      fullPath: '/community/u/$username'
+      preLoaderRoute: typeof CommunityUUsernameRouteImport
+      parentRoute: typeof CommunityRoute
+    }
+    '/community/topics/$slug': {
+      id: '/community/topics/$slug'
+      path: '/$slug'
+      fullPath: '/community/topics/$slug'
+      preLoaderRoute: typeof CommunityTopicsSlugRouteImport
+      parentRoute: typeof CommunityTopicsRoute
+    }
+    '/community/q/$questionId': {
+      id: '/community/q/$questionId'
+      path: '/q/$questionId'
+      fullPath: '/community/q/$questionId'
+      preLoaderRoute: typeof CommunityQQuestionIdRouteImport
+      parentRoute: typeof CommunityRoute
+    }
   }
 }
+
+interface CommunityTopicsRouteChildren {
+  CommunityTopicsSlugRoute: typeof CommunityTopicsSlugRoute
+}
+
+const CommunityTopicsRouteChildren: CommunityTopicsRouteChildren = {
+  CommunityTopicsSlugRoute: CommunityTopicsSlugRoute,
+}
+
+const CommunityTopicsRouteWithChildren = CommunityTopicsRoute._addFileChildren(
+  CommunityTopicsRouteChildren,
+)
+
+interface CommunityRouteChildren {
+  CommunityAskRoute: typeof CommunityAskRoute
+  CommunityTopicsRoute: typeof CommunityTopicsRouteWithChildren
+  CommunityIndexRoute: typeof CommunityIndexRoute
+  CommunityQQuestionIdRoute: typeof CommunityQQuestionIdRoute
+  CommunityUUsernameRoute: typeof CommunityUUsernameRoute
+}
+
+const CommunityRouteChildren: CommunityRouteChildren = {
+  CommunityAskRoute: CommunityAskRoute,
+  CommunityTopicsRoute: CommunityTopicsRouteWithChildren,
+  CommunityIndexRoute: CommunityIndexRoute,
+  CommunityQQuestionIdRoute: CommunityQQuestionIdRoute,
+  CommunityUUsernameRoute: CommunityUUsernameRoute,
+}
+
+const CommunityRouteWithChildren = CommunityRoute._addFileChildren(
+  CommunityRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  CommunityRoute: CommunityRouteWithChildren,
   ContactRoute: ContactRoute,
   DailyLifeRoute: DailyLifeRoute,
   GuidesRoute: GuidesRoute,
+  LoginRoute: LoginRoute,
   ReviewsRoute: ReviewsRoute,
+  SignupRoute: SignupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
