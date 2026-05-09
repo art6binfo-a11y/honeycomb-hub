@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ReviewsRouteImport } from './routes/reviews'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as GuidesRouteImport } from './routes/guides'
 import { Route as DailyLifeRouteImport } from './routes/daily-life'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -19,6 +20,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const ReviewsRoute = ReviewsRouteImport.update({
   id: '/reviews',
   path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuidesRoute = GuidesRouteImport.update({
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/daily-life': typeof DailyLifeRoute
   '/guides': typeof GuidesRoute
+  '/login': typeof LoginRoute
   '/reviews': typeof ReviewsRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/daily-life': typeof DailyLifeRoute
   '/guides': typeof GuidesRoute
+  '/login': typeof LoginRoute
   '/reviews': typeof ReviewsRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/daily-life': typeof DailyLifeRoute
   '/guides': typeof GuidesRoute
+  '/login': typeof LoginRoute
   '/reviews': typeof ReviewsRoute
 }
 export interface FileRouteTypes {
@@ -80,9 +89,17 @@ export interface FileRouteTypes {
     | '/contact'
     | '/daily-life'
     | '/guides'
+    | '/login'
     | '/reviews'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/daily-life' | '/guides' | '/reviews'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/daily-life'
+    | '/guides'
+    | '/login'
+    | '/reviews'
   id:
     | '__root__'
     | '/'
@@ -90,6 +107,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/daily-life'
     | '/guides'
+    | '/login'
     | '/reviews'
   fileRoutesById: FileRoutesById
 }
@@ -99,6 +117,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DailyLifeRoute: typeof DailyLifeRoute
   GuidesRoute: typeof GuidesRoute
+  LoginRoute: typeof LoginRoute
   ReviewsRoute: typeof ReviewsRoute
 }
 
@@ -109,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/reviews'
       fullPath: '/reviews'
       preLoaderRoute: typeof ReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides': {
@@ -155,8 +181,18 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DailyLifeRoute: DailyLifeRoute,
   GuidesRoute: GuidesRoute,
+  LoginRoute: LoginRoute,
   ReviewsRoute: ReviewsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
