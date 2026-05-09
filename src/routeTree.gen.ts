@@ -21,6 +21,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CommunityIndexRouteImport } from './routes/community.index'
 import { Route as CommunityTopicsRouteImport } from './routes/community.topics'
 import { Route as CommunityAskRouteImport } from './routes/community.ask'
+import { Route as CommunityUUsernameRouteImport } from './routes/community.u.$username'
 import { Route as CommunityTopicsSlugRouteImport } from './routes/community.topics.$slug'
 import { Route as CommunityQQuestionIdRouteImport } from './routes/community.q.$questionId'
 
@@ -84,6 +85,11 @@ const CommunityAskRoute = CommunityAskRouteImport.update({
   path: '/ask',
   getParentRoute: () => CommunityRoute,
 } as any)
+const CommunityUUsernameRoute = CommunityUUsernameRouteImport.update({
+  id: '/u/$username',
+  path: '/u/$username',
+  getParentRoute: () => CommunityRoute,
+} as any)
 const CommunityTopicsSlugRoute = CommunityTopicsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -110,6 +116,7 @@ export interface FileRoutesByFullPath {
   '/community/': typeof CommunityIndexRoute
   '/community/q/$questionId': typeof CommunityQQuestionIdRoute
   '/community/topics/$slug': typeof CommunityTopicsSlugRoute
+  '/community/u/$username': typeof CommunityUUsernameRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/community': typeof CommunityIndexRoute
   '/community/q/$questionId': typeof CommunityQQuestionIdRoute
   '/community/topics/$slug': typeof CommunityTopicsSlugRoute
+  '/community/u/$username': typeof CommunityUUsernameRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -142,6 +150,7 @@ export interface FileRoutesById {
   '/community/': typeof CommunityIndexRoute
   '/community/q/$questionId': typeof CommunityQQuestionIdRoute
   '/community/topics/$slug': typeof CommunityTopicsSlugRoute
+  '/community/u/$username': typeof CommunityUUsernameRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -160,6 +169,7 @@ export interface FileRouteTypes {
     | '/community/'
     | '/community/q/$questionId'
     | '/community/topics/$slug'
+    | '/community/u/$username'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -175,6 +185,7 @@ export interface FileRouteTypes {
     | '/community'
     | '/community/q/$questionId'
     | '/community/topics/$slug'
+    | '/community/u/$username'
   id:
     | '__root__'
     | '/'
@@ -191,6 +202,7 @@ export interface FileRouteTypes {
     | '/community/'
     | '/community/q/$questionId'
     | '/community/topics/$slug'
+    | '/community/u/$username'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -291,6 +303,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommunityAskRouteImport
       parentRoute: typeof CommunityRoute
     }
+    '/community/u/$username': {
+      id: '/community/u/$username'
+      path: '/u/$username'
+      fullPath: '/community/u/$username'
+      preLoaderRoute: typeof CommunityUUsernameRouteImport
+      parentRoute: typeof CommunityRoute
+    }
     '/community/topics/$slug': {
       id: '/community/topics/$slug'
       path: '/$slug'
@@ -325,6 +344,7 @@ interface CommunityRouteChildren {
   CommunityTopicsRoute: typeof CommunityTopicsRouteWithChildren
   CommunityIndexRoute: typeof CommunityIndexRoute
   CommunityQQuestionIdRoute: typeof CommunityQQuestionIdRoute
+  CommunityUUsernameRoute: typeof CommunityUUsernameRoute
 }
 
 const CommunityRouteChildren: CommunityRouteChildren = {
@@ -332,6 +352,7 @@ const CommunityRouteChildren: CommunityRouteChildren = {
   CommunityTopicsRoute: CommunityTopicsRouteWithChildren,
   CommunityIndexRoute: CommunityIndexRoute,
   CommunityQQuestionIdRoute: CommunityQQuestionIdRoute,
+  CommunityUUsernameRoute: CommunityUUsernameRoute,
 }
 
 const CommunityRouteWithChildren = CommunityRoute._addFileChildren(
