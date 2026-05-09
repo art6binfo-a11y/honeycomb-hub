@@ -19,6 +19,7 @@ import { Route as CommunityRouteImport } from './routes/community'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CommunityIndexRouteImport } from './routes/community.index'
+import { Route as CommunityTopicsRouteImport } from './routes/community.topics'
 import { Route as CommunityAskRouteImport } from './routes/community.ask'
 import { Route as CommunityQQuestionIdRouteImport } from './routes/community.q.$questionId'
 
@@ -72,6 +73,11 @@ const CommunityIndexRoute = CommunityIndexRouteImport.update({
   path: '/',
   getParentRoute: () => CommunityRoute,
 } as any)
+const CommunityTopicsRoute = CommunityTopicsRouteImport.update({
+  id: '/topics',
+  path: '/topics',
+  getParentRoute: () => CommunityRoute,
+} as any)
 const CommunityAskRoute = CommunityAskRouteImport.update({
   id: '/ask',
   path: '/ask',
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/reviews': typeof ReviewsRoute
   '/signup': typeof SignupRoute
   '/community/ask': typeof CommunityAskRoute
+  '/community/topics': typeof CommunityTopicsRoute
   '/community/': typeof CommunityIndexRoute
   '/community/q/$questionId': typeof CommunityQQuestionIdRoute
 }
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/reviews': typeof ReviewsRoute
   '/signup': typeof SignupRoute
   '/community/ask': typeof CommunityAskRoute
+  '/community/topics': typeof CommunityTopicsRoute
   '/community': typeof CommunityIndexRoute
   '/community/q/$questionId': typeof CommunityQQuestionIdRoute
 }
@@ -122,6 +130,7 @@ export interface FileRoutesById {
   '/reviews': typeof ReviewsRoute
   '/signup': typeof SignupRoute
   '/community/ask': typeof CommunityAskRoute
+  '/community/topics': typeof CommunityTopicsRoute
   '/community/': typeof CommunityIndexRoute
   '/community/q/$questionId': typeof CommunityQQuestionIdRoute
 }
@@ -138,6 +147,7 @@ export interface FileRouteTypes {
     | '/reviews'
     | '/signup'
     | '/community/ask'
+    | '/community/topics'
     | '/community/'
     | '/community/q/$questionId'
   fileRoutesByTo: FileRoutesByTo
@@ -151,6 +161,7 @@ export interface FileRouteTypes {
     | '/reviews'
     | '/signup'
     | '/community/ask'
+    | '/community/topics'
     | '/community'
     | '/community/q/$questionId'
   id:
@@ -165,6 +176,7 @@ export interface FileRouteTypes {
     | '/reviews'
     | '/signup'
     | '/community/ask'
+    | '/community/topics'
     | '/community/'
     | '/community/q/$questionId'
   fileRoutesById: FileRoutesById
@@ -253,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommunityIndexRouteImport
       parentRoute: typeof CommunityRoute
     }
+    '/community/topics': {
+      id: '/community/topics'
+      path: '/topics'
+      fullPath: '/community/topics'
+      preLoaderRoute: typeof CommunityTopicsRouteImport
+      parentRoute: typeof CommunityRoute
+    }
     '/community/ask': {
       id: '/community/ask'
       path: '/ask'
@@ -272,12 +291,14 @@ declare module '@tanstack/react-router' {
 
 interface CommunityRouteChildren {
   CommunityAskRoute: typeof CommunityAskRoute
+  CommunityTopicsRoute: typeof CommunityTopicsRoute
   CommunityIndexRoute: typeof CommunityIndexRoute
   CommunityQQuestionIdRoute: typeof CommunityQQuestionIdRoute
 }
 
 const CommunityRouteChildren: CommunityRouteChildren = {
   CommunityAskRoute: CommunityAskRoute,
+  CommunityTopicsRoute: CommunityTopicsRoute,
   CommunityIndexRoute: CommunityIndexRoute,
   CommunityQQuestionIdRoute: CommunityQQuestionIdRoute,
 }
@@ -300,3 +321,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
