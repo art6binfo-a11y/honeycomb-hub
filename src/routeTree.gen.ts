@@ -19,6 +19,7 @@ import { Route as CommunityRouteImport } from './routes/community'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CommunityIndexRouteImport } from './routes/community.index'
+import { Route as CommunityAskRouteImport } from './routes/community.ask'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -70,6 +71,11 @@ const CommunityIndexRoute = CommunityIndexRouteImport.update({
   path: '/',
   getParentRoute: () => CommunityRoute,
 } as any)
+const CommunityAskRoute = CommunityAskRouteImport.update({
+  id: '/ask',
+  path: '/ask',
+  getParentRoute: () => CommunityRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/reviews': typeof ReviewsRoute
   '/signup': typeof SignupRoute
+  '/community/ask': typeof CommunityAskRoute
   '/community/': typeof CommunityIndexRoute
 }
 export interface FileRoutesByTo {
@@ -92,6 +99,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/reviews': typeof ReviewsRoute
   '/signup': typeof SignupRoute
+  '/community/ask': typeof CommunityAskRoute
   '/community': typeof CommunityIndexRoute
 }
 export interface FileRoutesById {
@@ -105,6 +113,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/reviews': typeof ReviewsRoute
   '/signup': typeof SignupRoute
+  '/community/ask': typeof CommunityAskRoute
   '/community/': typeof CommunityIndexRoute
 }
 export interface FileRouteTypes {
@@ -119,6 +128,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/reviews'
     | '/signup'
+    | '/community/ask'
     | '/community/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -130,6 +140,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/reviews'
     | '/signup'
+    | '/community/ask'
     | '/community'
   id:
     | '__root__'
@@ -142,6 +153,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/reviews'
     | '/signup'
+    | '/community/ask'
     | '/community/'
   fileRoutesById: FileRoutesById
 }
@@ -229,14 +241,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommunityIndexRouteImport
       parentRoute: typeof CommunityRoute
     }
+    '/community/ask': {
+      id: '/community/ask'
+      path: '/ask'
+      fullPath: '/community/ask'
+      preLoaderRoute: typeof CommunityAskRouteImport
+      parentRoute: typeof CommunityRoute
+    }
   }
 }
 
 interface CommunityRouteChildren {
+  CommunityAskRoute: typeof CommunityAskRoute
   CommunityIndexRoute: typeof CommunityIndexRoute
 }
 
 const CommunityRouteChildren: CommunityRouteChildren = {
+  CommunityAskRoute: CommunityAskRoute,
   CommunityIndexRoute: CommunityIndexRoute,
 }
 
