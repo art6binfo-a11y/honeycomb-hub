@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Bookmark, Check, Copy } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 const prompts = [
   {
@@ -157,21 +158,39 @@ export function PromptDiary() {
         <div className="flex items-end justify-between mb-8 gap-6">
           <div>
             <div className="text-[11px] font-700 uppercase tracking-[0.2em] mb-2 text-bee-gold">
-              Prompt Diary
+              Prompt Diary · Prompt Hive
             </div>
             <h2 className="text-3xl sm:text-4xl font-700 tracking-tight max-w-2xl text-balance">
               Battle-tested prompts, ready to copy.
             </h2>
           </div>
-          <button className="hidden sm:inline text-[13px] font-600 text-bee-gold hover:underline underline-offset-4">
-            Open the diary →
-          </button>
+          <Link
+            to="/prompt-hive"
+            className="hidden sm:inline text-[13px] font-600 text-bee-gold hover:underline underline-offset-4"
+          >
+            Open the Prompt Hive →
+          </Link>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
           {prompts.map((p) => (
             <PromptCard key={p.title} prompt={p} />
           ))}
+        </div>
+
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <Link
+            to="/prompt-hive"
+            className="rounded-md bg-bee-gold px-5 py-2.5 text-[13px] font-700 text-deep-night shadow-bee hover:brightness-105 transition"
+          >
+            Explore the Prompt Hive
+          </Link>
+          <Link
+            to="/prompt-hive/submit"
+            className="rounded-md border border-bee-gold/40 px-5 py-2.5 text-[13px] font-600 text-bee-gold hover:bg-bee-gold/10 transition"
+          >
+            Submit your prompt
+          </Link>
         </div>
       </div>
     </section>

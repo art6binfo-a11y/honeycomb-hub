@@ -36,8 +36,8 @@ function maskAuthor<T extends { is_anonymous: boolean; author_id: string | null;
   return row;
 }
 
-export async function fetchQuestions(opts: { sort?: "top" | "new"; topicSlug?: string; limit?: number } = {}) {
-  const { sort = "new", topicSlug, limit = 20 } = opts;
+export async function fetchQuestions(opts: { sort?: "top" | "new"; topicSlug?: string; limit?: number; kind?: "question" | "prompt" } = {}) {
+  const { sort = "new", topicSlug, limit = 20, kind = "question" } = opts;
   let query = supabase
     .from("questions")
     .select(
@@ -47,6 +47,7 @@ export async function fetchQuestions(opts: { sort?: "top" | "new"; topicSlug?: s
         .replace(/\s+/g, " "),
     )
     .eq("status", "open")
+    .eq("kind", kind)
     .limit(limit);
 
   if (sort === "top") query = query.order("score", { ascending: false }).order("created_at", { ascending: false });
