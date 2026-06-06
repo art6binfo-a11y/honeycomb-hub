@@ -3,19 +3,40 @@ import { Link } from "@tanstack/react-router";
 const cols = [
   {
     title: "Learn",
-    links: ["AI Tools & Guides", "Tutorials", "Beginner Path", "AI Glossary"],
+    links: [
+      { label: "AI Tools & Guides", to: "/guides" },
+      { label: "Prompt Hive", to: "/prompt-hive" },
+      { label: "Beginner Path", to: "/guides" },
+      { label: "AI Glossary", to: "/guides" },
+    ],
   },
   {
     title: "Community",
-    links: ["Q&A Forum", "Prompt Diary", "Newsletter", "Discord"],
+    links: [
+      { label: "Q&A Forum", to: "/community" },
+      { label: "Prompt Hive", to: "/prompt-hive" },
+      { label: "Ask a Question", to: "/community/ask" },
+      { label: "Topics", to: "/community/topics" },
+    ],
   },
   {
     title: "Reviews",
-    links: ["ChatGPT", "Midjourney", "Claude", "Notion AI", "Perplexity"],
+    links: [
+      { label: "ChatGPT", to: "/reviews" },
+      { label: "Midjourney", to: "/reviews" },
+      { label: "Claude", to: "/reviews" },
+      { label: "Notion AI", to: "/reviews" },
+      { label: "Perplexity", to: "/reviews" },
+    ],
   },
   {
     title: "Company",
-    links: ["About", "Contact", "Editorial Policy", "Privacy", "Terms"],
+    links: [
+      { label: "About", to: "/about" },
+      { label: "Contact", to: "/contact" },
+      { label: "Privacy", to: "/privacy" },
+      { label: "Terms", to: "/terms" },
+    ],
   },
 ];
 
@@ -34,16 +55,9 @@ export function SiteFooter() {
             Your AI Learning Hub for Beginners. Tutorials, honest reviews, and a
             community of learners — built to help you keep up with the future.
           </p>
-          <div className="mt-5 flex gap-2">
-            {["X", "YT", "IG", "in"].map((s) => (
-              <button
-                key={s}
-                className="h-9 w-9 rounded-full border border-bee-gold/30 text-bee-gold text-[11px] font-600 hover:bg-bee-gold hover:text-deep-night transition-colors"
-              >
-                {s}
-              </button>
-            ))}
-          </div>
+          <p className="mt-5 text-[12px] text-dark-amber/80">
+            Social channels coming soon.
+          </p>
         </div>
 
         {cols.map((c) => (
@@ -53,13 +67,13 @@ export function SiteFooter() {
             </div>
             <ul className="space-y-2">
               {c.links.map((l) => (
-                <li key={l}>
-                  <a
-                    href="#"
+                <li key={l.label}>
+                  <Link
+                    to={l.to as any}
                     className="text-[13px] text-honey-lite/70 hover:text-bee-gold transition-colors"
                   >
-                    {l}
-                  </a>
+                    {l.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -71,10 +85,10 @@ export function SiteFooter() {
         <div className="mx-auto max-w-[1280px] px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] text-dark-amber">
           <div>© {new Date().getFullYear()} askyourbee.com — Made with 🍯 for AI beginners.</div>
           <div className="flex gap-5">
-            <a href="#" className="hover:text-bee-gold">Privacy</a>
-            <a href="#" className="hover:text-bee-gold">Terms</a>
-            <a href="#" className="hover:text-bee-gold">Disclaimer &amp; Disclosures</a>
-            <a href="#" className="hover:text-bee-gold">Cookies</a>
+            <Link to="/privacy" className="hover:text-bee-gold">Privacy</Link>
+            <Link to="/terms" className="hover:text-bee-gold">Terms</Link>
+            <Link to="/disclaimer" className="hover:text-bee-gold">Disclaimer &amp; Disclosures</Link>
+            <Link to="/cookies" className="hover:text-bee-gold">Cookies</Link>
           </div>
         </div>
       </div>

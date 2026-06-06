@@ -87,6 +87,7 @@ const dailyLifeGroups = [
 const navItems = [
   { label: "Home", to: "/" as const },
   { label: "Community", to: "/community" as const },
+  { label: "Prompt Hive", to: "/prompt-hive" as const },
   { label: "AI Tools & Guides", to: "/guides" as const, dropdown: "guides" as const },
   { label: "AI For Daily Life", to: "/daily-life" as const, dropdown: "daily" as const },
   { label: "AI Tools Review", to: "/reviews" as const },

@@ -266,6 +266,7 @@ export type Database = {
           created_at: string
           id: string
           is_anonymous: boolean
+          kind: string
           score: number
           status: Database["public"]["Enums"]["content_status"]
           title: string
@@ -280,6 +281,7 @@ export type Database = {
           created_at?: string
           id?: string
           is_anonymous?: boolean
+          kind?: string
           score?: number
           status?: Database["public"]["Enums"]["content_status"]
           title: string
@@ -294,6 +296,7 @@ export type Database = {
           created_at?: string
           id?: string
           is_anonymous?: boolean
+          kind?: string
           score?: number
           status?: Database["public"]["Enums"]["content_status"]
           title?: string

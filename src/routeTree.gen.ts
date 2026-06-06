@@ -9,22 +9,35 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ReviewsRouteImport } from './routes/reviews'
+import { Route as PromptHiveRouteImport } from './routes/prompt-hive'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as GuidesRouteImport } from './routes/guides'
+import { Route as DisclaimerRouteImport } from './routes/disclaimer'
 import { Route as DailyLifeRouteImport } from './routes/daily-life'
+import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PromptHiveIndexRouteImport } from './routes/prompt-hive.index'
 import { Route as CommunityIndexRouteImport } from './routes/community.index'
+import { Route as PromptHiveSubmitRouteImport } from './routes/prompt-hive.submit'
 import { Route as CommunityTopicsRouteImport } from './routes/community.topics'
 import { Route as CommunityAskRouteImport } from './routes/community.ask'
+import { Route as ApiLoginDotphpRouteImport } from './routes/api/login[.]php'
 import { Route as CommunityUUsernameRouteImport } from './routes/community.u.$username'
 import { Route as CommunityTopicsSlugRouteImport } from './routes/community.topics.$slug'
 import { Route as CommunityQQuestionIdRouteImport } from './routes/community.q.$questionId'
 
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
@@ -33,6 +46,16 @@ const SignupRoute = SignupRouteImport.update({
 const ReviewsRoute = ReviewsRouteImport.update({
   id: '/reviews',
   path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PromptHiveRoute = PromptHiveRouteImport.update({
+  id: '/prompt-hive',
+  path: '/prompt-hive',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -45,9 +68,19 @@ const GuidesRoute = GuidesRouteImport.update({
   path: '/guides',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DisclaimerRoute = DisclaimerRouteImport.update({
+  id: '/disclaimer',
+  path: '/disclaimer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DailyLifeRoute = DailyLifeRouteImport.update({
   id: '/daily-life',
   path: '/daily-life',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -70,10 +103,20 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PromptHiveIndexRoute = PromptHiveIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PromptHiveRoute,
+} as any)
 const CommunityIndexRoute = CommunityIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => CommunityRoute,
+} as any)
+const PromptHiveSubmitRoute = PromptHiveSubmitRouteImport.update({
+  id: '/submit',
+  path: '/submit',
+  getParentRoute: () => PromptHiveRoute,
 } as any)
 const CommunityTopicsRoute = CommunityTopicsRouteImport.update({
   id: '/topics',
@@ -84,6 +127,11 @@ const CommunityAskRoute = CommunityAskRouteImport.update({
   id: '/ask',
   path: '/ask',
   getParentRoute: () => CommunityRoute,
+} as any)
+const ApiLoginDotphpRoute = ApiLoginDotphpRouteImport.update({
+  id: '/api/login.php',
+  path: '/api/login.php',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const CommunityUUsernameRoute = CommunityUUsernameRouteImport.update({
   id: '/u/$username',
@@ -106,14 +154,22 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/community': typeof CommunityRouteWithChildren
   '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
   '/daily-life': typeof DailyLifeRoute
+  '/disclaimer': typeof DisclaimerRoute
   '/guides': typeof GuidesRoute
   '/login': typeof LoginRoute
+  '/privacy': typeof PrivacyRoute
+  '/prompt-hive': typeof PromptHiveRouteWithChildren
   '/reviews': typeof ReviewsRoute
   '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
+  '/api/login.php': typeof ApiLoginDotphpRoute
   '/community/ask': typeof CommunityAskRoute
   '/community/topics': typeof CommunityTopicsRouteWithChildren
+  '/prompt-hive/submit': typeof PromptHiveSubmitRoute
   '/community/': typeof CommunityIndexRoute
+  '/prompt-hive/': typeof PromptHiveIndexRoute
   '/community/q/$questionId': typeof CommunityQQuestionIdRoute
   '/community/topics/$slug': typeof CommunityTopicsSlugRoute
   '/community/u/$username': typeof CommunityUUsernameRoute
@@ -122,14 +178,21 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
   '/daily-life': typeof DailyLifeRoute
+  '/disclaimer': typeof DisclaimerRoute
   '/guides': typeof GuidesRoute
   '/login': typeof LoginRoute
+  '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
+  '/api/login.php': typeof ApiLoginDotphpRoute
   '/community/ask': typeof CommunityAskRoute
   '/community/topics': typeof CommunityTopicsRouteWithChildren
+  '/prompt-hive/submit': typeof PromptHiveSubmitRoute
   '/community': typeof CommunityIndexRoute
+  '/prompt-hive': typeof PromptHiveIndexRoute
   '/community/q/$questionId': typeof CommunityQQuestionIdRoute
   '/community/topics/$slug': typeof CommunityTopicsSlugRoute
   '/community/u/$username': typeof CommunityUUsernameRoute
@@ -140,14 +203,22 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/community': typeof CommunityRouteWithChildren
   '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
   '/daily-life': typeof DailyLifeRoute
+  '/disclaimer': typeof DisclaimerRoute
   '/guides': typeof GuidesRoute
   '/login': typeof LoginRoute
+  '/privacy': typeof PrivacyRoute
+  '/prompt-hive': typeof PromptHiveRouteWithChildren
   '/reviews': typeof ReviewsRoute
   '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
+  '/api/login.php': typeof ApiLoginDotphpRoute
   '/community/ask': typeof CommunityAskRoute
   '/community/topics': typeof CommunityTopicsRouteWithChildren
+  '/prompt-hive/submit': typeof PromptHiveSubmitRoute
   '/community/': typeof CommunityIndexRoute
+  '/prompt-hive/': typeof PromptHiveIndexRoute
   '/community/q/$questionId': typeof CommunityQQuestionIdRoute
   '/community/topics/$slug': typeof CommunityTopicsSlugRoute
   '/community/u/$username': typeof CommunityUUsernameRoute
@@ -159,14 +230,22 @@ export interface FileRouteTypes {
     | '/about'
     | '/community'
     | '/contact'
+    | '/cookies'
     | '/daily-life'
+    | '/disclaimer'
     | '/guides'
     | '/login'
+    | '/privacy'
+    | '/prompt-hive'
     | '/reviews'
     | '/signup'
+    | '/terms'
+    | '/api/login.php'
     | '/community/ask'
     | '/community/topics'
+    | '/prompt-hive/submit'
     | '/community/'
+    | '/prompt-hive/'
     | '/community/q/$questionId'
     | '/community/topics/$slug'
     | '/community/u/$username'
@@ -175,14 +254,21 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/cookies'
     | '/daily-life'
+    | '/disclaimer'
     | '/guides'
     | '/login'
+    | '/privacy'
     | '/reviews'
     | '/signup'
+    | '/terms'
+    | '/api/login.php'
     | '/community/ask'
     | '/community/topics'
+    | '/prompt-hive/submit'
     | '/community'
+    | '/prompt-hive'
     | '/community/q/$questionId'
     | '/community/topics/$slug'
     | '/community/u/$username'
@@ -192,14 +278,22 @@ export interface FileRouteTypes {
     | '/about'
     | '/community'
     | '/contact'
+    | '/cookies'
     | '/daily-life'
+    | '/disclaimer'
     | '/guides'
     | '/login'
+    | '/privacy'
+    | '/prompt-hive'
     | '/reviews'
     | '/signup'
+    | '/terms'
+    | '/api/login.php'
     | '/community/ask'
     | '/community/topics'
+    | '/prompt-hive/submit'
     | '/community/'
+    | '/prompt-hive/'
     | '/community/q/$questionId'
     | '/community/topics/$slug'
     | '/community/u/$username'
@@ -210,15 +304,28 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CommunityRoute: typeof CommunityRouteWithChildren
   ContactRoute: typeof ContactRoute
+  CookiesRoute: typeof CookiesRoute
   DailyLifeRoute: typeof DailyLifeRoute
+  DisclaimerRoute: typeof DisclaimerRoute
   GuidesRoute: typeof GuidesRoute
   LoginRoute: typeof LoginRoute
+  PrivacyRoute: typeof PrivacyRoute
+  PromptHiveRoute: typeof PromptHiveRouteWithChildren
   ReviewsRoute: typeof ReviewsRoute
   SignupRoute: typeof SignupRoute
+  TermsRoute: typeof TermsRoute
+  ApiLoginDotphpRoute: typeof ApiLoginDotphpRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signup': {
       id: '/signup'
       path: '/signup'
@@ -231,6 +338,20 @@ declare module '@tanstack/react-router' {
       path: '/reviews'
       fullPath: '/reviews'
       preLoaderRoute: typeof ReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prompt-hive': {
+      id: '/prompt-hive'
+      path: '/prompt-hive'
+      fullPath: '/prompt-hive'
+      preLoaderRoute: typeof PromptHiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -247,11 +368,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuidesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/disclaimer': {
+      id: '/disclaimer'
+      path: '/disclaimer'
+      fullPath: '/disclaimer'
+      preLoaderRoute: typeof DisclaimerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/daily-life': {
       id: '/daily-life'
       path: '/daily-life'
       fullPath: '/daily-life'
       preLoaderRoute: typeof DailyLifeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -282,12 +417,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/prompt-hive/': {
+      id: '/prompt-hive/'
+      path: '/'
+      fullPath: '/prompt-hive/'
+      preLoaderRoute: typeof PromptHiveIndexRouteImport
+      parentRoute: typeof PromptHiveRoute
+    }
     '/community/': {
       id: '/community/'
       path: '/'
       fullPath: '/community/'
       preLoaderRoute: typeof CommunityIndexRouteImport
       parentRoute: typeof CommunityRoute
+    }
+    '/prompt-hive/submit': {
+      id: '/prompt-hive/submit'
+      path: '/submit'
+      fullPath: '/prompt-hive/submit'
+      preLoaderRoute: typeof PromptHiveSubmitRouteImport
+      parentRoute: typeof PromptHiveRoute
     }
     '/community/topics': {
       id: '/community/topics'
@@ -302,6 +451,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/community/ask'
       preLoaderRoute: typeof CommunityAskRouteImport
       parentRoute: typeof CommunityRoute
+    }
+    '/api/login.php': {
+      id: '/api/login.php'
+      path: '/api/login.php'
+      fullPath: '/api/login.php'
+      preLoaderRoute: typeof ApiLoginDotphpRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/community/u/$username': {
       id: '/community/u/$username'
@@ -359,17 +515,47 @@ const CommunityRouteWithChildren = CommunityRoute._addFileChildren(
   CommunityRouteChildren,
 )
 
+interface PromptHiveRouteChildren {
+  PromptHiveSubmitRoute: typeof PromptHiveSubmitRoute
+  PromptHiveIndexRoute: typeof PromptHiveIndexRoute
+}
+
+const PromptHiveRouteChildren: PromptHiveRouteChildren = {
+  PromptHiveSubmitRoute: PromptHiveSubmitRoute,
+  PromptHiveIndexRoute: PromptHiveIndexRoute,
+}
+
+const PromptHiveRouteWithChildren = PromptHiveRoute._addFileChildren(
+  PromptHiveRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   CommunityRoute: CommunityRouteWithChildren,
   ContactRoute: ContactRoute,
+  CookiesRoute: CookiesRoute,
   DailyLifeRoute: DailyLifeRoute,
+  DisclaimerRoute: DisclaimerRoute,
   GuidesRoute: GuidesRoute,
   LoginRoute: LoginRoute,
+  PrivacyRoute: PrivacyRoute,
+  PromptHiveRoute: PromptHiveRouteWithChildren,
   ReviewsRoute: ReviewsRoute,
   SignupRoute: SignupRoute,
+  TermsRoute: TermsRoute,
+  ApiLoginDotphpRoute: ApiLoginDotphpRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
